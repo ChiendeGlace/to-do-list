@@ -1,8 +1,10 @@
 // When I click Submit
 let form = document.getElementById('addForm');
-let itemList = document.getElementById('items')
+let itemList = document.getElementById('items');
+let filter = document.getElementById('filter');
 form.addEventListener('submit', addItem);
 itemList.addEventListener('click', removeItem);
+filter.addEventListener('keyup', filterItems);
 // Add a li elemnt with input content and classes
 function addItem(e) {
   e.preventDefault();
@@ -29,7 +31,17 @@ function removeItem(e) {
 };
 // When I type in search input field 
 // Compare results of input field to items
+function filterItems(e) {
+  let text = e.target.value.toLowerCase();
+  let items = itemList.getElementsByTagName('li');
+  Array.from(items).forEach(function(item){
+    let itemName = item.firstChild.textContent;
+    if (itemName.toLowerCase().indexOf(text) != -1){
+      item.style.display = 'flex';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+};
 // If items don't much display none
 // else do animation
-//
-//
